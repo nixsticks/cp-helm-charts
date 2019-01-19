@@ -57,9 +57,9 @@ boiling-heron-cp-kafka-jmx-configmap   1     5m
 NAME                              TYPE       CLUSTER-IP     EXTERNAL-IP  PORT(S)            AGE
 boiling-heron-zookeeper-headless  ClusterIP  None           <none>       2888/TCP,3888/TCP  5m
 boiling-heron-zookeeper           ClusterIP  10.19.244.17   <none>       2181/TCP           5m
-boiling-heron-0-external          NodePort   10.19.240.13   <none>       19092:31090/TCP    5m
-boiling-heron-1-external          NodePort   10.19.243.241  <none>       19092:31091/TCP    5m
-boiling-heron-2-external          NodePort   10.19.248.189  <none>       19092:31092/TCP    5m
+boiling-heron-0-nodeport          NodePort   10.19.240.13   <none>       19092:31090/TCP    5m
+boiling-heron-1-nodeport          NodePort   10.19.243.241  <none>       19092:31091/TCP    5m
+boiling-heron-2-nodeport          NodePort   10.19.248.189  <none>       19092:31092/TCP    5m
 boiling-heron-cp-kafka-headless   ClusterIP  None           <none>       9092/TCP           5m
 boiling-heron-cp-kafka            ClusterIP  10.19.254.252  <none>       9092/TCP           5m
 
@@ -87,7 +87,7 @@ There are
 1. A [StatefulSet](https://kubernetes.io/docs/concepts/workloads/controllers/statefulset/) `boiling-heron-cp-kafka` which contains 3 Kafka [Pods](https://kubernetes.io/docs/concepts/workloads/pods/pod-overview/): `boiling-heron-cp-kafka-<0|1|2>`. Each Pod has a container running a Kafka Broker and an optional sidecar JMX Exporter Container.
 1. A [Service](https://kubernetes.io/docs/concepts/services-networking/service/) `boiling-heron-cp-kafka` for clients to connect to Kafka.
 1. A [Headless Service](https://kubernetes.io/docs/concepts/services-networking/service/#headless-services) `boiling-heron-cp-kafka-headless` to control the network domain for the Kafka processes.
-1. A group(N = number of brokers) of [NodePort Service](https://kubernetes.io/docs/concepts/services-networking/service/#type-nodeport) `boiling-heron-cp-kafka-${i}-external` to allow access to Kafka Cluster from outside.
+1. A group(N = number of brokers) of [NodePort Service](https://kubernetes.io/docs/concepts/services-networking/service/#type-nodeport) `boiling-heron-cp-kafka-${i}-nodeport` to allow access to Kafka Cluster from outside.
 1. A [ConfigMap](https://kubernetes.io/docs/tasks/configure-pod-container/configure-pod-configmap/) which contains configuration for Prometheus JMX Exporter.
 
 ## Configuration
